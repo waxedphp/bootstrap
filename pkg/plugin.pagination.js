@@ -29,6 +29,18 @@
         if (typeof that.dd.name == 'undefined') return;
         var rec = that.pluggable.getvar(that.dd.name, RECORD);
         if (typeof rec != 'object') { return; };
+        if (typeof rec.page == 'object') {
+          if (typeof rec.page.count == 'number') {
+            this.count = rec.page.count;
+          };
+          if (typeof rec.page.limit == 'number') {
+            this.limit = rec.page.limit;
+          };
+          if (typeof rec.page.offset == 'number') {
+            this.offset = rec.page.offset;
+          };
+          this.build();
+        };
 
       },
       
@@ -59,6 +71,7 @@
         
         var o = {
           'page': pg,
+          'limit': this.limit,
           'offset': offset,
           'action': that.dd.action
         };
